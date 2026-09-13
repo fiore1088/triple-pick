@@ -7,7 +7,7 @@ class MovieRepository {
 
   Future<List<MovieModel>> searchContent({required String query, int maxResults = 20}) async {
     try { return await _tmdbService.searchWithProviders(query: query, maxResults: maxResults); }
-    catch (e) { throw Exception('Errore nella ricerca: \$e'); }
+    catch (e) { throw Exception('Errore nella ricerca: $e'); }
   }
 
   Future<List<MovieModel>> getRecommendations({required List<int> genreIds, String? query, int maxResults = 20}) async {
@@ -31,7 +31,7 @@ class MovieRepository {
         } catch (e) { return movie; }
       }));
       return enrichedResults.where((m) => m.hasWatchProvider).take(maxResults).toList();
-    } catch (e) { throw Exception('Errore nel recupero raccomandazioni: \$e'); }
+    } catch (e) { throw Exception('Errore nel recupero raccomandazioni: $e'); }
   }
 
   Future<List<MovieModel>> getTrending({int maxResults = 10}) async {
@@ -52,7 +52,7 @@ class MovieRepository {
         } catch (e) { return movie; }
       }));
       return enrichedResults.where((m) => m.hasWatchProvider).take(maxResults).toList();
-    } catch (e) { throw Exception('Errore nel recupero trending: \$e'); }
+    } catch (e) { throw Exception('Errore nel recupero trending: $e'); }
   }
 
   Future<MovieModel?> getMovieDetails(int movieId) async {
@@ -69,7 +69,7 @@ class MovieRepository {
       );
       if (supportedProvider == null) return movie;
       return movie.copyWith(platformName: supportedProvider['provider_name'], providerId: supportedProvider['provider_id'], providerLogoPath: supportedProvider['logo_path'], watchLink: providers['link'], flatrateType: 'flatrate');
-    } catch (e) { throw Exception('Errore nel recupero dettagli: \$e'); }
+    } catch (e) { throw Exception('Errore nel recupero dettagli: $e'); }
   }
 
   Future<Map<int, String>> getMovieGenres() async { return await _tmdbService.getMovieGenres(); }

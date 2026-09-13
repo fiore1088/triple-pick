@@ -116,9 +116,9 @@ class _SettingsSheet extends ConsumerWidget {
             Text('Le tue preferenze', style: AppTheme.bodySmall.copyWith(color: AppTheme.textMutedColor)),
             const SizedBox(height: 8),
             Row(children: [
-              Icon(Icons.thumb_up, color: AppTheme.successColor, size: 20), const SizedBox(width: 8), Text('\${userPrefs.feedback.values.where((f) => f == FeedbackType.like).length}', style: AppTheme.bodyMedium),
-              const SizedBox(width: 24), Icon(Icons.thumb_down, color: AppTheme.errorColor, size: 20), const SizedBox(width: 8), Text('\${userPrefs.feedback.values.where((f) => f == FeedbackType.dislike).length}', style: AppTheme.bodyMedium),
-              const SizedBox(width: 24), Icon(Icons.block, color: AppTheme.textMutedColor, size: 20), const SizedBox(width: 8), Text('\${userPrefs.excludedTitles.length}', style: AppTheme.bodyMedium),
+              Icon(Icons.thumb_up, color: AppTheme.successColor, size: 20), const SizedBox(width: 8), Text('${userPrefs.feedback.values.where((f) => f == FeedbackType.like).length}', style: AppTheme.bodyMedium),
+              const SizedBox(width: 24), Icon(Icons.thumb_down, color: AppTheme.errorColor, size: 20), const SizedBox(width: 8), Text('${userPrefs.feedback.values.where((f) => f == FeedbackType.dislike).length}', style: AppTheme.bodyMedium),
+              const SizedBox(width: 24), Icon(Icons.block, color: AppTheme.textMutedColor, size: 20), const SizedBox(width: 8), Text('${userPrefs.excludedTitles.length}', style: AppTheme.bodyMedium),
             ]),
             const SizedBox(height: 16),
           ],

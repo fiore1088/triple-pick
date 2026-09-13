@@ -14,7 +14,7 @@ class ExcludedTitlesWidget extends ConsumerWidget {
     if (excludedIds.isEmpty) return const SizedBox.shrink();
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-        Text('Titoli esclusi (\${excludedIds.length})', style: AppTheme.bodySmall.copyWith(color: AppTheme.textMutedColor)),
+        Text('Titoli esclusi (${excludedIds.length})', style: AppTheme.bodySmall.copyWith(color: AppTheme.textMutedColor)),
         TextButton(onPressed: () => _showClearDialog(context, ref), child: Text('Ripristina tutti', style: AppTheme.bodySmall.copyWith(color: AppTheme.secondaryColor))),
       ]),
       const SizedBox(height: 8),

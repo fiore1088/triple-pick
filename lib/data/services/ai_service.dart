@@ -32,7 +32,7 @@ class AiService {
   String _buildParsePrompt(String userRequest) {
     return '''Sei un assistente esperto di film e serie TV. Analizza la richiesta dell'utente e estrai criteri strutturati per la ricerca.
 
-Richiesta dell'utente: "\$userRequest"
+Richiesta dell'utente: "$userRequest"
 
 Rispondi SOLO con un JSON valido (senza markdown o testo aggiunto) con questa struttura:
 {
@@ -50,14 +50,14 @@ Rispondi SOLO con un JSON valido (senza markdown o testo aggiunto) con questa st
   }
 
   String _buildSelectionPrompt({required String userRequest, required List<Map<String, dynamic>> candidates, required SearchCriteria criteria}) {
-    final candidatesText = candidates.map((c) => '- ID: \${c['id']}, Titolo: \${c['title']}, Genere: \${c['genres']}, Valutazione: \${c['vote_average']}, Piattaforma: \${c['platform_name'] ?? 'N/A'}').join('\n');
+    final candidatesText = candidates.map((c) => '- ID: ${c['id']}, Titolo: ${c['title']}, Genere: ${c['genres']}, Valutazione: ${c['vote_average']}, Piattaforma: ${c['platform_name'] ?? 'N/A'}').join('\n');
     return '''Sei un esperto di raccomandazioni film. Seleziona i TOP 3 film piu adatti per l'utente.
 
-Richiesta originale: "\$userRequest"
-Criteri estratti: Genere: \${criteria.genres.join(', ')}, Tono: \${criteria.mood}, Durata max: \${criteria.runtimeMax}min
+Richiesta originale: "$userRequest"
+Criteri estratti: Genere: ${criteria.genres.join(', ')}, Tono: ${criteria.mood}, Durata max: ${criteria.runtimeMax}min
 
 Candidati disponibili:
-\$candidatesText
+$candidatesText
 
 Seleziona esattamente 3 film che meglio soddisfano la richiesta. Per ogni film, fornisci una motivazione personalizzata.
 
@@ -73,8 +73,8 @@ Rispondi SOLO con un JSON valido:
     try {
       final model = AiConstants.getModel(_modelId);
       final response = await http.post(
-        Uri.parse('\${AiConstants.openRouterBaseUrl}\${AiConstants.openRouterChatCompletions}'),
-        headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer \${Env.openRouterApiKey}', 'HTTP-Referer': 'https://tripplepick.app', 'X-Title': 'TriplePick'},
+        Uri.parse('${AiConstants.openRouterBaseUrl}${AiConstants.openRouterChatCompletions}'),
+        headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ${Env.openRouterApiKey}', 'HTTP-Referer': 'https://tripplepick.app', 'X-Title': 'TriplePick'},
         body: json.encode({'model': _modelId, 'messages': [{'role': 'system', 'content': 'Sei un assistente esperto di film e serie TV. Rispondi sempre in JSON valido senza markdown.'}, {'role': 'user', 'content': prompt}], 'max_tokens': model.maxTokens, 'temperature': 0.7}),
       ).timeout(const Duration(seconds: 30));
       if (response.statusCode == 200) {
@@ -89,7 +89,7 @@ Rispondi SOLO con un JSON valido:
         }
       }
       return null;
-    } catch (e) { print('AI API exception: \$e'); return null; }
+    } catch (e) { print('AI API exception: $e'); return null; }
   }
 
   SearchCriteria _parseSearchCriteria(String jsonStr, String originalRequest) {
@@ -130,7 +130,7 @@ class SearchCriteria {
   const SearchCriteria({required this.query, required this.genres, required this.mood, required this.runtimeMax, required this.language, this.yearMin = 0, this.yearMax = 0, this.excludeViolence = false, this.excludeHorror = false, this.keywords = const []});
 
   @override
-  String toString() => 'SearchCriteria(query: \$query, genres: \$genres, mood: \$mood)';
+  String toString() => 'SearchCriteria(query: $query, genres: $genres, mood: $mood)';
 }
 
 class Recommendation {
@@ -142,5 +142,5 @@ class Recommendation {
   const Recommendation({required this.movieId, required this.title, required this.reason, required this.confidence});
 
   @override
-  String toString() => 'Recommendation(id: \$movieId, title: \$title, confidence: \$confidence)';
+  String toString() => 'Recommendation(id: $movieId, title: $title, confidence: $confidence)';
 }

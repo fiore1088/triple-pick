@@ -47,7 +47,7 @@ class DeepLinkService {
 
       return DeepLinkResult(success: false, error: 'Impossibile aprire il link', platform: platform);
     } catch (e) {
-      return DeepLinkResult(success: false, error: "Errore nell'apertura del link: \$e", platform: platform);
+      return DeepLinkResult(success: false, error: "Errore nell'apertura del link: $e", platform: platform);
     }
   }
 
@@ -78,8 +78,8 @@ class DeepLinkService {
   static String getStoreUrl(String platform) {
     final info = _platformInfo[platform];
     if (info == null) return '';
-    if (Platform.isIOS) { return 'https://apps.apple.com/app/id\${info.appStoreId}'; }
-    else if (Platform.isAndroid) { return 'https://play.google.com/store/apps/details?id=\${info.playStoreId}'; }
+    if (Platform.isIOS) { return 'https://apps.apple.com/app/id${info.appStoreId}'; }
+    else if (Platform.isAndroid) { return 'https://play.google.com/store/apps/details?id=${info.playStoreId}'; }
     return '';
   }
 }
@@ -91,7 +91,7 @@ class DeepLinkResult {
   final String platform;
   const DeepLinkResult({required this.success, this.error, this.openedWith, required this.platform});
   @override
-  String toString() => 'DeepLinkResult(success: \$success, platform: \$platform, openedWith: \$openedWith)';
+  String toString() => 'DeepLinkResult(success: $success, platform: $platform, openedWith: $openedWith)';
 }
 
 class PlatformInfo {

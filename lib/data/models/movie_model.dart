@@ -92,12 +92,12 @@ class MovieModel {
     try { return int.parse(releaseDate!.substring(0, 4)); } catch (_) { return null; }
   }
 
-  String get posterUrl => 'https://image.tmdb.org/t/p/w500\$posterPath';
-  String get backdropUrl => 'https://image.tmdb.org/t/p/w780\$backdropPath';
+  String get posterUrl => 'https://image.tmdb.org/t/p/w500$posterPath';
+  String get backdropUrl => 'https://image.tmdb.org/t/p/w780$backdropPath';
   bool get hasWatchProvider => platformName != null && watchLink != null;
 
   @override
-  String toString() => 'MovieModel(id: \$id, title: \$title, platform: \$platformName)';
+  String toString() => 'MovieModel(id: $id, title: $title, platform: $platformName)';
   @override
   bool operator ==(Object other) => identical(this, other) || other is MovieModel && runtimeType == other.runtimeType && id == other.id;
   @override

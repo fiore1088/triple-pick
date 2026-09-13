@@ -50,7 +50,7 @@ class RecommendationService {
 
       return RecommendationResult(success: true, items: results, criteria: criteria, totalCandidates: candidates.length);
     } catch (e) {
-      return RecommendationResult(success: false, error: 'Errore nel recupero raccomandazioni: \$e');
+      return RecommendationResult(success: false, error: 'Errore nel recupero raccomandazioni: $e');
     }
   }
 

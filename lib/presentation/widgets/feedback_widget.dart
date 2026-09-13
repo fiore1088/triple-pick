@@ -32,7 +32,7 @@ class _FeedbackWidgetState extends ConsumerState<FeedbackWidget> {
   Future<void> _excludeTitle() async {
     await ref.read(userPreferencesProvider.notifier).addExcludedTitle(widget.movieId);
     if (mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('\${widget.movieTitle} escluso dai prossimi consigli'), backgroundColor: AppTheme.secondaryColor, action: SnackBarAction(label: 'Annulla', textColor: AppTheme.textPrimaryColor, onPressed: () async { await ref.read(userPreferencesProvider.notifier).removeExcludedTitle(widget.movieId); })));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('${widget.movieTitle} escluso dai prossimi consigli'), backgroundColor: AppTheme.secondaryColor, action: SnackBarAction(label: 'Annulla', textColor: AppTheme.textPrimaryColor, onPressed: () async { await ref.read(userPreferencesProvider.notifier).removeExcludedTitle(widget.movieId); })));
     }
     widget.onExclude?.call();
   }

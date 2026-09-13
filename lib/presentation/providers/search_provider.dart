@@ -37,7 +37,7 @@ class SearchNotifier extends StateNotifier<SearchState> {
       if (result.success) {
         state = state.copyWith(recommendations: result.top3, criteria: result.criteria, results: result.top3.map((r) => r.movie).toList(), isLoading: false);
       } else { state = state.copyWith(error: result.error, isLoading: false); }
-    } catch (e) { state = state.copyWith(error: 'Errore nella ricerca: \$e', isLoading: false); }
+    } catch (e) { state = state.copyWith(error: 'Errore nella ricerca: $e', isLoading: false); }
   }
 
   void updatePlatforms(List<String> platforms) { state = state.copyWith(selectedPlatforms: platforms); }

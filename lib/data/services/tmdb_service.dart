@@ -46,27 +46,27 @@ class TmdbService {
   }
 
   Future<Map<String, dynamic>?> getMovieWatchProviders(int movieId) async {
-    final response = await _makeRequest(endpoint: '/movie/\$movieId/watch/providers', params: {});
+    final response = await _makeRequest(endpoint: '/movie/$movieId/watch/providers', params: {});
     if (response == null) return null;
     final results = response['results'] as Map<String, dynamic>? ?? {};
     return results['IT'];
   }
 
   Future<Map<String, dynamic>?> getTvWatchProviders(int tvId) async {
-    final response = await _makeRequest(endpoint: '/tv/\$tvId/watch/providers', params: {});
+    final response = await _makeRequest(endpoint: '/tv/$tvId/watch/providers', params: {});
     if (response == null) return null;
     final results = response['results'] as Map<String, dynamic>? ?? {};
     return results['IT'];
   }
 
   Future<MovieModel?> getMovieDetails(int movieId, {String language = 'it-IT'}) async {
-    final response = await _makeRequest(endpoint: '/movie/\$movieId', params: {'language': language});
+    final response = await _makeRequest(endpoint: '/movie/$movieId', params: {'language': language});
     if (response == null) return null;
     return MovieModel.fromSearchJson(response, mediaType: 'movie');
   }
 
   Future<MovieModel?> getTvDetails(int tvId, {String language = 'it-IT'}) async {
-    final response = await _makeRequest(endpoint: '/tv/\$tvId', params: {'language': language});
+    final response = await _makeRequest(endpoint: '/tv/$tvId', params: {'language': language});
     if (response == null) return null;
     return MovieModel.fromSearchJson(response, mediaType: 'tv');
   }
@@ -86,7 +86,7 @@ class TmdbService {
   }
 
   Future<List<MovieModel>> getTrendingMovies({String timeWindow = 'week', String language = 'it-IT'}) async {
-    final response = await _makeRequest(endpoint: '/trending/movie/\$timeWindow', params: {'language': language});
+    final response = await _makeRequest(endpoint: '/trending/movie/$timeWindow', params: {'language': language});
     if (response == null) return [];
     final results = response['results'] as List? ?? [];
     return results.map((json) => MovieModel.fromSearchJson(json, mediaType: 'movie')).toList();
@@ -115,11 +115,11 @@ class TmdbService {
 
   Future<Map<String, dynamic>?> _makeRequest({required String endpoint, required Map<String, String> params}) async {
     try {
-      final uri = Uri.parse('\${ApiConstants.tmdbBaseUrl}\$endpoint').replace(queryParameters: {'api_key': Env.tmdbApiKey, ...params});
+      final uri = Uri.parse('${ApiConstants.tmdbBaseUrl}$endpoint').replace(queryParameters: {'api_key': Env.tmdbApiKey, ...params});
       final response = await _client.get(uri, headers: {'Content-Type': 'application/json'}).timeout(const Duration(seconds: 30));
       if (response.statusCode == 200) { return json.decode(response.body); }
-      else { print('TMDB API error: \${response.statusCode}'); return null; }
-    } catch (e) { print('TMDB API exception: \$e'); return null; }
+      else { print('TMDB API error: ${response.statusCode}'); return null; }
+    } catch (e) { print('TMDB API exception: $e'); return null; }
   }
 
   void dispose() { _client.close(); }

@@ -90,7 +90,7 @@ class _ResultScreenState extends ConsumerState<ResultScreen> {
   Widget _buildResults(SearchState searchState, UserPreferencesState userPrefs) {
     final top3 = searchState.recommendations.take(3).toList();
     return Column(children: [
-      if (searchState.criteria != null) Container(margin: const EdgeInsets.symmetric(horizontal: 16), padding: const EdgeInsets.all(12), decoration: BoxDecoration(color: AppTheme.secondaryColor.withOpacity(0.1), borderRadius: BorderRadius.circular(12), border: Border.all(color: AppTheme.secondaryColor.withOpacity(0.3))), child: Row(children: [Icon(Icons.auto_awesome, color: AppTheme.secondaryColor, size: 20), const SizedBox(width: 10), Expanded(child: Text('AI ha trovato \${searchState.totalCandidates} candidati, ti mostriamo i top 3', style: TextStyle(color: AppTheme.secondaryColor, size: 13)))])),
+      if (searchState.criteria != null) Container(margin: const EdgeInsets.symmetric(horizontal: 16), padding: const EdgeInsets.all(12), decoration: BoxDecoration(color: AppTheme.secondaryColor.withOpacity(0.1), borderRadius: BorderRadius.circular(12), border: Border.all(color: AppTheme.secondaryColor.withOpacity(0.3))), child: Row(children: [Icon(Icons.auto_awesome, color: AppTheme.secondaryColor, size: 20), const SizedBox(width: 10), Expanded(child: Text('AI ha trovato ${searchState.totalCandidates} candidati, ti mostriamo i top 3', style: TextStyle(color: AppTheme.secondaryColor, size: 13)))])),
       const SizedBox(height: 16),
       if (widget.platforms.isNotEmpty) Padding(padding: const EdgeInsets.symmetric(horizontal: 16), child: Row(children: [Icon(Icons.filter_list, color: AppTheme.textMutedColor, size: 16), const SizedBox(width: 8), Expanded(child: SingleChildScrollView(scrollDirection: Axis.horizontal, child: Row(children: widget.platforms.map((platform) => Padding(padding: const EdgeInsets.only(right: 8), child: Chip(label: Text(platform, style: const TextStyle(color: AppTheme.textPrimaryColor, fontSize: 12)), backgroundColor: AppTheme.surfaceColor, side: BorderSide.none, padding: const EdgeInsets.symmetric(horizontal: 8), materialTapTargetSize: MaterialTapTargetSize.shrinkWrap))).toList())))])),
       const SizedBox(height: 16),
@@ -106,13 +106,13 @@ class _ResultScreenState extends ConsumerState<ResultScreen> {
           ])),
         ]));
       })),
-      if (searchState.recommendations.length > 3) Padding(padding: const EdgeInsets.all(16), child: Text('E altri \${searchState.recommendations.length - 3} titoli disponibili...', style: AppTheme.bodySmall.copyWith(color: AppTheme.textMutedColor))),
+      if (searchState.recommendations.length > 3) Padding(padding: const EdgeInsets.all(16), child: Text('E altri ${searchState.recommendations.length - 3} titoli disponibili...', style: AppTheme.bodySmall.copyWith(color: AppTheme.textMutedColor))),
     ]);
   }
 
   Future<void> _openContent(dynamic movie) async {
     if (movie.watchLink == null) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Link non disponibile per \${movie.title}'), backgroundColor: AppTheme.errorColor));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Link non disponibile per ${movie.title}'), backgroundColor: AppTheme.errorColor));
       return;
     }
     final result = await DeepLinkService.launchContent(platform: movie.platformName ?? '', contentId: movie.id.toString(), fallbackUrl: movie.watchLink!);
